@@ -5,60 +5,159 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Centered, minimal styling */
+    /* General styles */
     body {
+      background-color: #121212;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e0e0e0;
+      margin: 0;
+      overflow: hidden; /* Prevent scrolling */
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      background-color: #121212;
-      margin: 0;
-      color: #e0e0e0;
-      font-family: Arial, sans-serif;
     }
+
+    /* Navbar styling to match index.html */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background-color: #1c1c1c;
+      padding: 10px 0;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      border-bottom: 1px solid #333;
+      z-index: 10;
+    }
+    .navbar a {
+      color: #ff5757;
+      text-decoration: none;
+      font-size: 1em;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .navbar a:hover {
+      background-color: #ff5757;
+      color: #121212;
+    }
+
+    /* Model viewer container fills screen */
     .viewer-container {
-      max-width: 90vw;
-      max-height: 80vh;
-      text-align: center;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
-    h1 {
+
+    /* Title and instructions */
+    .title, .instructions {
+      position: absolute;
+      text-align: center;
+      z-index: 10;
+    }
+    .title {
+      top: 60px;
       font-size: 1.5em;
       color: #ff5757;
-      margin-bottom: 10px;
+      margin-bottom: 20px; /* Added margin for separation */
     }
-    p {
-      color: #ccc;
-      margin-top: 5px;
+    .instructions {
+      top: 100px; /* Increased top position to avoid overlap */
       font-size: 1em;
+      color: #ccc;
     }
+
+    /* Model viewer fills container */
     model-viewer {
       width: 100%;
-      height: 70vh;
-      border-radius: 10px;
-      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+      height: 100%;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* Navigation arrows for model switching */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2em;
+      color: #ff5757;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .arrow.left {
+      left: 20px;
+    }
+    .arrow.right {
+      right: 20px;
+    }
+    .arrow:hover {
+      color: #ff8585;
     }
   </style>
 </head>
 <body>
 
+<!-- Navigation Bar -->
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="bookmark.html">Bookmark</a>
+  <a href="infographic.html">Infographic</a>
+  <a href="video.html">Video</a>
+  <a href="ac_kukiri.html">AC Kukiri</a>
+</div>
+
+<!-- Full-Screen Model Viewer with Title and Instructions -->
 <div class="viewer-container">
-  <h1>AC Kukiri 3D Model</h1>
-  <p>Click and drag to rotate, scroll to zoom, or use AR to view it in your space!</p>
+  <!-- Title and Instructions -->
+  <div class="title">AC Kukiri 3D Model</div>
+  <div class="instructions">Click and drag to rotate, scroll to zoom, or use AR to view it in your space!</div>
+
+  <!-- Navigation Arrows -->
+  <div class="arrow left" onclick="navigateToModel('previous')">←</div>
+  <div class="arrow right" onclick="navigateToModel('next')">→</div>
 
   <!-- Model Viewer Component -->
- <model-viewer src="AC_kukiri.glb" 
-              camera-controls 
-              auto-rotate 
-              rotation-per-second="30deg"
-              ar ar-modes="webxr scene-viewer quick-look" 
-              shadow-intensity="1" 
-              environment-image="neutral"
-   style="width: 100%; height: 600px; max-height: 80vh; border-radius: 8px;">
-</model-viewer>
-
+  <model-viewer src="https://headhead4.github.io/Portfolio/AC_Kukiri/AC_kukiri.glb" 
+                camera-controls 
+                auto-rotate 
+                rotation-per-second="30deg"
+                ar ar-modes="webxr scene-viewer quick-look" 
+                shadow-intensity="1" 
+                environment-image="neutral">
+  </model-viewer>
 </div>
 
 <!-- Load the model-viewer script -->
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+<!-- JavaScript for model navigation -->
+<script>
+  // Array of model URLs
+  const models = [
+    "https://headhead4.github.io/Portfolio/AC_Kukiri/AC_kukiri.glb",
+    // Add more model URLs here for future navigation
+  ];
+
+  // Current model index
+  let currentModelIndex = 0;
+
+  function navigateToModel(direction) {
+    if (direction === 'next') {
+      currentModelIndex = (currentModelIndex + 1) % models.length;
+    } else if (direction === 'previous') {
+      currentModelIndex = (currentModelIndex - 1 + models.length) % models.length;
+    }
+    document.querySelector('model-viewer').src = models[currentModelIndex];
+  }
+</script>
+
 </body>
 </html>
