@@ -65,10 +65,10 @@
       top: 60px;
       font-size: 1.5em;
       color: #ff5757;
-      margin-bottom: 20px;
+      margin-bottom: 20px; /* Added margin for separation */
     }
     .instructions {
-      top: 100px;
+      top: 100px; /* Increased top position to avoid overlap */
       font-size: 1em;
       color: #ccc;
     }
@@ -107,7 +107,7 @@
 
 <!-- Navigation Bar -->
 <div class="navbar">
-  <a href="../index.html">Home</a>
+  <a href="index.html">Home</a>
   <a href="bookmark.html">Bookmark</a>
   <a href="infographic.html">Infographic</a>
   <a href="video.html">Video</a>
@@ -124,19 +124,14 @@
   <div class="arrow left" onclick="navigateToModel('previous')">←</div>
   <div class="arrow right" onclick="navigateToModel('next')">→</div>
 
-  <!-- Model Viewer Component with Orientation -->
-  <model-viewer src="https://headhead4.github.io/Portfolio/AC_Kukiri/AC_kukiri.glb"
-                camera-controls
-                auto-rotate
+  <!-- Model Viewer Component -->
+  <model-viewer src="https://headhead4.github.io/Portfolio/AC_Kukiri/AC_kukiri.glb" 
+                camera-controls 
+                auto-rotate 
                 rotation-per-second="30deg"
-                ar
-                ar-modes="webxr scene-viewer quick-look"
-                shadow-intensity="1"
-                environment-image="neutral"
-                
-                camera-orbit="0deg 90deg auto" <!-- Set initial orientation -->
-                camera-target="0m 0m 0m"
-                field-of-view="30deg">
+                ar ar-modes="webxr scene-viewer quick-look" 
+                shadow-intensity="1" 
+                environment-image="neutral">
   </model-viewer>
 </div>
 
@@ -166,4 +161,3 @@
 
 </body>
 </html>
-
