@@ -10,10 +10,6 @@
 
     <link rel="stylesheet"
           href="css/style.css">
-
-    <script type="module"
-            src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
-    </script>
 </head>
 
 <body>
@@ -21,9 +17,13 @@
 <div class="container">
 
     <header class="header">
+
         <h1>Andrew Kronenberg</h1>
+
         <p>3D Modeling Portfolio</p>
+
         <p>Applied Engineering / Computer-Aided Drafting & Design</p>
+
     </header>
 
     <main class="content">
@@ -34,27 +34,24 @@
                  alt="Andrew Kronenberg">
 
             <p>
-                I am an Applied Engineering student at Millersville University
-                with a concentration in Computer-Aided Drafting and Design and
-                expect to complete my Bachelor's degree in December 2026.
+                I am an Applied Engineering student at Millersville
+                University with a concentration in Computer-Aided
+                Drafting and Design and expect to complete my
+                Bachelor's degree in December 2026.
             </p>
 
             <p>
-                My experience includes SolidWorks, Autodesk Inventor,
-                AutoCAD, Tinkercad, assembly modeling, technical drawings,
-                blueprint interpretation, and manufacturing-focused design.
+                My experience includes SolidWorks,
+                Autodesk Inventor, AutoCAD, Tinkercad,
+                technical drawings, blueprint interpretation,
+                and manufacturing-focused design.
             </p>
 
             <p>
-                During my internship with Proteus Space, I standardized
-                satellite CAD models, developed model orientation standards,
-                and used Python automation tools to improve repetitive
+                During my internship with Proteus Space,
+                I standardized satellite CAD models and
+                developed automation tools to improve
                 engineering workflows.
-            </p>
-
-            <p>
-                This portfolio highlights examples of CAD modeling,
-                engineering design, and technical drafting work.
             </p>
 
             <a class="resume-button"
@@ -71,60 +68,58 @@
         </h2>
 
 
-        <section class="model-card">
+        <div class="model-grid">
+            <section class="model-card">
+    
+                <img class="model-thumbnail"
+                     src="images/ac-kukiri-poster.webp"
+                     alt="AC Kukiri">
+    
+                <h3>AC Kukiri</h3>
+    
+                <p>
+                    Interactive 3D knife model.
+                </p>
+    
+                <a class="model-button"
+                   href="pages/ac-kukiri.html">
+                    View Model
+                </a>
+    
+            </section>
 
-            <h3>AC Kukiri</h3>
-
-            <p>
-                Interactive 3D model. Rotate, zoom, and inspect
-                the design directly within the browser.
-            </p>
-
-            <model-viewer
-                src="models/AC_kukiri.glb"
-                poster="images/ac-kukiri-poster.webp"
-                camera-controls
-                auto-rotate
-                shadow-intensity="1"
-                loading="eager"
-                reveal="auto"
-                alt="AC Kukiri 3D model">
-            </model-viewer>
-
-        </section>
-
-
-        <section class="model-card">
-
-            <h3>Sample Model</h3>
-
-            <p>
-                Placeholder duplicate model used to demonstrate
-                multiple portfolio entries.
-            </p>
-
-            <model-viewer
-                src="models/sample-model.glb"
-                poster="images/sample-model-poster.webp"
-                camera-controls
-                auto-rotate
-                shadow-intensity="1"
-                loading="lazy"
-                reveal="auto"
-                alt="Sample 3D model">
-            </model-viewer>
-
-        </section>
+            <section class="model-card">
+    
+                <img class="model-thumbnail"
+                     src="images/sample-model-poster.webp"
+                     alt="Sample model">
+    
+                <h3>Sample Model</h3>
+    
+                <p>
+                    Placeholder model used for testing multiple entries.
+                </p>
+    
+                <a class="model-button"
+                   href="pages/sample-model.html">
+                    View Model
+                </a>
+    
+            </section>
+        </div>
 
     </main>
 
 
     <footer class="footer">
+
         &copy; 2026
         <span>Andrew Kronenberg</span>
+
     </footer>
 
 </div>
 
 </body>
+
 </html>
