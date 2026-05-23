@@ -53,9 +53,14 @@ body {
     border: 4px solid #ff5757;
 }
 
-.profile p {
+.bio-text {
     max-width: 750px;
-    margin: 0 auto 16px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.profile p {
+    margin: 0 0 16px;
     color: #d3d3d3;
     line-height: 1.6;
 }
