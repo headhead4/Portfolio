@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Project</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+    <script type="module"
+            src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <h1 id="project-title"></h1>
+        <p id="project-type"></p>
+    </header>
+
+    <main class="content">
+
+        <nav class="model-nav" id="top-nav"></nav>
+
+        <div id="project-content"></div>
+
+        <nav class="model-nav" id="bottom-nav"></nav>
+
+    </main>
+
+    <footer class="footer">
+        &copy; 2026
+        <span>Andrew Kronenberg</span>
+    </footer>
+
+</div>
+
+<script src="../js/projects.js"></script>
+
+<script>
+
+    // -------------------------------------------------------
+    // Determine which project was requested from the URL.
+    //
+    // Example:
+    //     project.html?id=aco-kukiri
+    //
+    // The project definitions themselves are stored in
+    // projects.js.
+    // -------------------------------------------------------
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get("id");
+
+    const currentIndex = projects.findIndex((project) => project.id === projectId);
+    const project = projects[currentIndex];
+
+    // -------------------------------------------------------
+    // Handle invalid or unknown project IDs.
+    // -------------------------------------------------------
+    if (!project) {
+        document.getElementById("project-title").textContent = "Project Not Found";
+        document.getElementById("project-content").innerHTML = `
+            <p>The requested project could not be found.</p>
+            <a class="model-button" href="../index.html">
+                Back to Portfolio
+            </a>
+        `;
+
+    } else {
+
+        // -------------------------------------------------------
+        // Populate page title and project metadata.
+        // -------------------------------------------------------
+        document.title = project.title;
+        document.getElementById("project-title").textContent = project.title;
+        document.getElementById("project-type").textContent = project.type;
+
+        // -------------------------------------------------------
+        // Build Previous / Next navigation based on the
+        // project order defined in projects.js.
+        //
+        // Navigation wraps around at the beginning/end.
+        // -------------------------------------------------------
+        const previousProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+        const nextProject = projects[(currentIndex + 1) % projects.length];
+
+        const navHtml = `
+            <a href="project.html?id=${previousProject.id}">
+                ← Previous Project
+            </a>
+
+            <a href="../index.html">
+                Back to Portfolio
+            </a>
+
+            <a href="project.html?id=${nextProject.id}">
+                Next Project →
+            </a>
+        `;
+
+        document.getElementById("top-nav").innerHTML = navHtml;
+        document.getElementById("bottom-nav").innerHTML = navHtml;
+
+        // -------------------------------------------------------
+        // Render the project.
+        //
+        // Current portfolio convention:
+        //
+        //   project.model -> Interactive GLB model
+        //   otherwise     -> PDF-based project
+        //
+        // -------------------------------------------------------
+			if (project.model) {
+
+				document.getElementById("project-content").innerHTML = `
+					<div class="model-container">
+
+						<div class="loading-spinner"
+							 id="loading-spinner">
+						</div>
+
+						<model-viewer
+							id="model-viewer"
+							src="../${project.model}"
+							camera-controls
+							auto-rotate
+							shadow-intensity="1"
+							alt="${project.title}">
+						</model-viewer>
+
+					</div>
+
+					<p>${project.description}</p>
+				`;
+
+				const viewer = document.getElementById("model-viewer");
+				const spinner = document.getElementById("loading-spinner");
+
+				viewer.addEventListener("load", () => {
+					spinner.remove();
+				});
+
+			} else {
+
+            document.getElementById("project-content").innerHTML = `
+                <img class="project-image"
+                     src="../${project.thumbnail}"
+                     alt="${project.title}">
+
+                <p>${project.description}</p>
+
+                <a class="model-button"
+                   href="../${project.pdf}"
+                   target="_blank">
+                    View Full PDF
+                </a>
+            `;
+        }
+    }
+
+</script>
+
+</body>
+
+</html>
