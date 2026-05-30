@@ -145,6 +145,15 @@ model-viewer {
     border-radius: 10px;
 }
 
+.project-image-link {
+    display: block;
+    text-decoration: none;
+}
+
+.project-image-link:hover .project-image {
+    outline: 2px solid #ff5757;
+}
+
 .card-instruction {
     color: #ff5757;
     font-weight: 600;
@@ -174,6 +183,21 @@ model-viewer {
 .model-button:hover,
 .model-nav a:hover {
     background-color: #ff3333;
+}
+
+.contact-info {
+    margin-top: 25px;
+    color: #d3d3d3;
+}
+
+.contact-info a {
+    color: #ff5757;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    color: #ff7777;
+    text-decoration: underline;
 }
 
 .model-nav {
